@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>博客 by Hexo</title>
+  
+  
+  <link href="https://www.price1999.asia/atom.xml" rel="self"/>
+  
+  <link href="https://www.price1999.asia/"/>
+  <updated>2024-04-02T08:21:15.939Z</updated>
+  <id>https://www.price1999.asia/</id>
+  
+  <author>
+    <name>Tianqi Shen</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>tai-e 程序分析作业</title>
+    <link href="https://www.price1999.asia/2024/04/01/tai-e-0/"/>
+    <id>https://www.price1999.asia/2024/04/01/tai-e-0/</id>
+    <published>2024-03-31T16:32:49.000Z</published>
+    <updated>2024-04-02T08:21:15.939Z</updated>
+    
+    <content type="html"><![CDATA[<img src="https://blog-img.price1999.asia/imgs/202404010028224.webp" style="zoom: 15%;" /><p>非常愉快的，基本完成了毕业论文初稿的写作。</p><p>距离毕业还有一点时间，所以决定做一下这个作业组。</p><p>李樾老师和谭添老师的课，我是开课第一个学期上的，那应该是大三的第二个学期，而现在我已经是研三第二学期了，软件分析的课程作业已经几经迭代，我想有必要重新做一下。</p><p>可以看作某种「游戏」？应该可以吧。</p><p><a href="https://tai-e.pascal-lab.net/intro/setup.html">tai-e作业网站</a></p><a href="/2024/04/02/tai-e-1/" title="tai-e 作业1攻略">作业1</a><a href="/2024/04/02/tai-e-2/" title="tai-e 作业2攻略">作业2【点不开吧】</a>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;img src=&quot;https://blog-img.price1999.asia/imgs/202404010028224.webp&quot; style=&quot;zoom: 15%;&quot; /&gt;
+
+&lt;p&gt;非常愉快的，基本完成了毕业论文初稿的写作。&lt;/p&gt;
+&lt;p&gt;距离毕业还有一点时间，所以决定做</summary>
+      
+    
+    
+    
+    
+    <category term="程序分析" scheme="https://www.price1999.asia/tags/%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/"/>
+    
+    <category term="随记" scheme="https://www.price1999.asia/tags/%E9%9A%8F%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://www.price1999.asia/2024/03/30/hello-world/"/>
+    <id>https://www.price1999.asia/2024/03/30/hello-world/</id>
+    <published>2024-03-30T11:26:42.197Z</published>
+    <updated>2024-04-01T04:43:57.530Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p><h3 id="测试图床"><a href="#测试图床" class="headerlink" title="测试图床"></a>测试图床</h3><p><img src="https://blog-img.price1999.asia/imgs/202403311343622.png"></p><p><img src="https://blog-img.price1999.asia/imgs/202403311352152.webp"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>
