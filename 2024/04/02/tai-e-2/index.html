@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>博客 by Hexo</title>
+  <meta name="author" content="Tianqi Shen" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="博客 by Hexo" type="application/atom+xml">
+</head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="博客 by Hexo">博客 by Hexo</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="主页">主页</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="归档">归档</a></li>
+      
+      <li class="ml-4"><a href="/other-tools/" title="其他工具">其他工具</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">tai-e 作业2攻略</h1>
+  <article class="post-content"><img src="https://blog-img.price1999.asia/imgs/202404031730992.png" alt="ac" style="zoom:50%;" />
+
+<h2 id="作业要求"><a href="#作业要求" class="headerlink" title="作业要求"></a>作业要求</h2><p><a target="_blank" rel="noopener" href="https://tai-e.pascal-lab.net/pa2.html">作业2链接</a><br>常量传播分析 正向分析 实现一个worklist算法<br>和 <em>作业1</em> 类似，属于基础性算法 并不存在算法上的巨大挑战</p>
+<h4 id="工作量估计"><a href="#工作量估计" class="headerlink" title="工作量估计"></a>工作量估计</h4><p>～3h</p>
+<blockquote>
+<p>[!NOTE]</p>
+<p>由于有了 <em>作业1</em>  的实现经验 应该能在API上少一点花的时间<br>不过这里也引入了更多的概念，因此有得有失吧。</p>
+<p>但令人遗憾的是 从ac率也能看出来 这里存在一个我最开始也没预料到的问题</p>
+</blockquote>
+<h4 id="需要完成的任务"><a href="#需要完成的任务" class="headerlink" title="需要完成的任务"></a>需要完成的任务</h4><p>在作业网站已经给出了相当的信息了，不过我们还是尝试做出整理，在搞明白这些之后，难度并不大：</p>
+<img src="https://blog-img.price1999.asia/imgs/202404031510018.png" alt="worklist" style="zoom:45%;" />
+
+<p><code>Solver.initializeForward(CFG,DataflowResult)</code>：前三行的初始化过程<code>WorkListSolver.doSolveForward(CFG,DataflowResult)</code>：算法整个流程<br><code>CPFact newBoundaryFact(CFG)</code>：第一行<br><code>CPFact newInitialFact()</code>：第三行<br><code>void meetInto(CPFact,CPFact)</code>：while循环下第三行 <em><code>IN[B] = ...</code></em> 。<br><code>boolean transferNode(Stmt,CPFact,CPFact)</code>：while循环下第四行<br><code>Value meetValue(Value,Value)</code>：<code>meetInto</code>方法内部辅助方法<br><code>Value evaluate(Exp,CPFact)</code>：<code>transferNode</code>方法内部辅助方法，用于求值</p>
+<p>其中<code>Value meetValue(Value,Value)</code>对应内容<br><img src="https://blog-img.price1999.asia/imgs/202404031523868.png" alt="meet" style="zoom:35%;" /></p>
+<p><code>boolean transferNode(Stmt,CPFact,CPFact)</code>及其辅助方法<br><img src="https://blog-img.price1999.asia/imgs/202404031525918.png" alt="transferNode" style="zoom:33%;" /></p>
+<blockquote>
+<p>[!IMPORTANT]</p>
+<p>另外 这张图中有一个大坑</p>
+</blockquote>
+<h2 id="值得注意的信息"><a href="#值得注意的信息" class="headerlink" title="值得注意的信息"></a>值得注意的信息</h2><h4 id="操作顺序问题【算是个巨坑？】"><a href="#操作顺序问题【算是个巨坑？】" class="headerlink" title="操作顺序问题【算是个巨坑？】"></a>操作顺序问题【算是个巨坑？】</h4><img src="https://blog-img.price1999.asia/imgs/202404031731274.png" alt="企业微信截图_1653055000114" style="zoom:50%;" />
+
+<p>cite from <a target="_blank" rel="noopener" href="https://github.com/pascal-lab/Tai-e-assignments/issues/2">常量传播constant问题</a></p>
+<h4 id="pascal-taie-ir-exp-Exp类对应结构及其补充"><a href="#pascal-taie-ir-exp-Exp类对应结构及其补充" class="headerlink" title="pascal.taie.ir.exp.Exp类对应结构及其补充"></a><code>pascal.taie.ir.exp.Exp</code>类对应结构及其补充</h4><img src="https://blog-img.price1999.asia/imgs/202404031443771.png" alt="exp-subclasses" style="zoom:40%;" />
+这个类结构对实现而言相对关键，在网站中已经有了相当的介绍了，此处仅给出必要的补充。
+
+<p>其中<code>pascal.taie.ir.stmt.DefinitionStmt</code> 类文档中没有说清楚（虽然确实不难）就是对于单独的方法调用例如<code>a.foo()</code>，它也是属于此类的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the left-hand side expression. If this Stmt is an &#123;<span class="doctag">@link</span> Invoke&#125;</span></span><br><span class="line"><span class="comment"> * which does not have a left-hand side expression, e.g., o.m(...), then</span></span><br><span class="line"><span class="comment"> * this method returns null; otherwise, it must return a non-null value.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="meta">@Nullable</span> L <span class="title function_">getLValue</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="boolean-transferNode-Stmt-CPFact-CPFact-中的各种情况"><a href="#boolean-transferNode-Stmt-CPFact-CPFact-中的各种情况" class="headerlink" title="boolean transferNode(Stmt,CPFact,CPFact)中的各种情况"></a><code>boolean transferNode(Stmt,CPFact,CPFact)</code>中的各种情况</h4><p>这些内容分布在文档中，同样做出整理：</p>
+<p>只需要关注等号左侧为变量且右侧只能是如下几类表达式的赋值语句：</p>
+<ul>
+<li>常量，如 <code>x = 1</code></li>
+<li>变量，如 <code>x = y</code></li>
+<li>二元运算表达式，如 <code>x = a + b</code> 和 <code>x = a &gt;&gt; b</code></li>
+</ul>
+<p>等号左侧为变量、等号右侧为其它表达式的赋值语句，例如方法调用（<code>x = m(...)</code>）和字段 load（<code>x = o.f</code>），你需要对它们进行保守的近似处理（也许会不够精确），即把它们当作 <code>x = NAC</code>。后续的作业将逐步解锁方法调用和字段访问的精确分析技巧。</p>
+<p>对于上面没有提到的其它语句（例如字段存储 <code>o.f = x</code>），我们只需要使用恒等函数作为它们的 <code>transfer</code> 函数。</p>
+<h4 id="方法参数的初始化"><a href="#方法参数的初始化" class="headerlink" title="方法参数的初始化"></a>方法参数的初始化</h4><blockquote>
+<p>在实现 <code>newBoundaryFact()</code> 的时候，你要小心地处理每个会被分析的方法的参数。具体来说，你要将它们的值初始化为 <code>NAC</code> (请思考：为什么要这么做？)。</p>
+</blockquote>
+<p>这个问题我给出自己的理解：</p>
+<p>首先，目前我们实现的常量分析依旧是方法内分析，在一次分析中，我们不会利用上实际程序对应的调用点静态信息。但是方法真的调用的时候，参数确实是存在的，这就要求我们在<code>newBoundaryFact()</code>中对对应情况做出处理，因此需要做出初始化。<br>现在就是对于初始化为<code>NAC</code>的理解了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">foo</span><span class="params">(<span class="type">int</span> x)</span>&#123;</span><br><span class="line">  <span class="type">int</span> y; <span class="comment">// y = UNDEF</span></span><br><span class="line">  <span class="keyword">if</span>(condition)&#123;</span><br><span class="line">    y = <span class="number">6</span>; <span class="comment">// y = 6</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    y = x; <span class="comment">// y = val(x)</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// y = meetVal(6, val(x))</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从如上代码中我们可以发现 <code>val(x) = NAC</code>才能满足我们对于常量传播静态分析sound的要求</p>
+<p>另外我们怎么获取所有的方法参数？<br><code>cfg.getIR().getParams()</code></p>
+<h4 id="boolean-transferNode-Stmt-CPFact-CPFact-方法"><a href="#boolean-transferNode-Stmt-CPFact-CPFact-方法" class="headerlink" title="boolean transferNode(Stmt,CPFact,CPFact) 方法"></a><code>boolean transferNode(Stmt,CPFact,CPFact)</code> 方法</h4><p>注意恒等条件</p>
+<h4 id="辅助打包脚本"><a href="#辅助打包脚本" class="headerlink" title="辅助打包脚本"></a>辅助打包脚本</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 目的压缩包名称</span></span><br><span class="line">archive_name=<span class="string">&quot;archive.zip&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 当前目录</span></span><br><span class="line">current_dir=$(<span class="built_in">pwd</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 声明一个数组，包含原始文件路径</span></span><br><span class="line"><span class="built_in">declare</span> -a files=(</span><br><span class="line">    <span class="string">&quot;./src/main/java/pascal/taie/analysis/dataflow/analysis/constprop/ConstantPropagation.java&quot;</span></span><br><span class="line">    <span class="string">&quot;./src/main/java/pascal/taie/analysis/dataflow/solver/Solver.java&quot;</span></span><br><span class="line">    <span class="string">&quot;./src/main/java/pascal/taie/analysis/dataflow/solver/WorkListSolver.java&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建ZIP文件并添加文件，不保留目录结构</span></span><br><span class="line">zip -j <span class="string">&quot;<span class="variable">$current_dir</span>/<span class="variable">$archive_name</span>&quot;</span> <span class="string">&quot;<span class="variable">$&#123;files[@]&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Files have been archived into <span class="variable">$archive_name</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+</article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+       <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/" title="#程序分析" class="mr-2 text-gray-500">#程序分析</a> 
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-04-02</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Tianqi Shen
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
